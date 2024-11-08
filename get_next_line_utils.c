@@ -98,6 +98,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	a = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (!a)
 		return (ft_strdup(""));
+	if (len_s1 == 1)
+		s1[0] = '\0';
 	ft_strlcat(a, s1, (len_s1 + 1));
 	ft_strlcat(a, s2, (len_s1 + len_s2 + 1));
 	return (a);

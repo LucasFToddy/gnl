@@ -108,7 +108,10 @@ char    *get_next_line(int fd)
                         while(btys_read > 0)
                         {
                                 if (remaining)
+                                {
+                                        free(line);
                                         line = ft_strjoin(remaining, line);
+                                }
                                 line = ft_strjoin(line, tmp);
                                 if (ft_strchar(line, '\n') != -1)
                                         break;
@@ -142,7 +145,7 @@ int     main()
                 printf("%d\n",c);
                 tmp = get_next_line(fd);
                 printf("%s",tmp);
-                free(tmp);
+                //free(tmp);
                 c++;
         }
         close(fd);
