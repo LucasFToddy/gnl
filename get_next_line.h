@@ -16,7 +16,7 @@
 
 #ifndef BUFFER_SIZE
 
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 42
 
 #endif
 
@@ -30,5 +30,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char    *get_next_line(int fd);
 size_t   ft_strlen(char *s);
 char	*ft_strdup(char *s);
+void	ft_bzero(void *s, size_t n);
+size_t	ft_strlcat(char *dst, char *src, size_t size);
 
 #endif

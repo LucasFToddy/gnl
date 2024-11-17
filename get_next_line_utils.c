@@ -17,12 +17,14 @@ size_t   ft_strlen(char *s)
         size_t  i;
 
         i = 0;
+	if (!s || !*s)
+        	return 0;
         while (s[i])
                 i++;
         return (i);
 }
 
-static size_t	ft_strlcat(char *dst, char *src, size_t size)
+size_t	ft_strlcat(char *dst, char *src, size_t size)
 {
 	size_t	i;
 	size_t	len_dst;
@@ -46,12 +48,15 @@ static size_t	ft_strlcat(char *dst, char *src, size_t size)
 	return (len_dst + len_src);
 }
 
+
 char	*ft_strdup(char *s)
 {
 	char	*a;
 	size_t	i;
 	size_t	len;
 
+	if (!s || !*s)
+        	return NULL;
 	i = 0;
 	len = ft_strlen(s);
 	a = (char *)malloc(sizeof(char) * (len + 1));
@@ -72,6 +77,8 @@ int     ft_strchar(char *s, int c)
         int  i;
 
         i = 0;
+	if (!s || !*s)
+        	return -1;
         while (s[i])
         {
                 if (s[i] == c)
@@ -90,17 +97,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(""));
+		return (ft_strdup(s2));
 	if (!s2)
-		return (ft_strdup(""));
+		return (ft_strdup(s1));
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	a = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (!a)
 		return (ft_strdup(""));
-	if (len_s1 == 1)
+	ft_bzero(a, (len_s1 + len_s2 + 1));
+	if (len_s1 == 0)
 		s1[0] = '\0';
 	ft_strlcat(a, s1, (len_s1 + 1));
 	ft_strlcat(a, s2, (len_s1 + len_s2 + 1));
+	free(s1);
+	free(s2);
 	return (a);
 }
