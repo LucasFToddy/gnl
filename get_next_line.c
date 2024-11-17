@@ -69,7 +69,6 @@ char    *ft_cpy_line(int fd, char **s, char **s_static)
                 if (btys_read < 0)
                 {
                         free(*s);
-                        free(*s_static);
                         return (NULL);
                 }
                 if (btys_read == 0)
@@ -96,7 +95,6 @@ char    *get_next_line(int fd)
                 return (NULL);
         tmp[0] = '\0';
         line = ft_cpy_line(fd, &tmp, &remaining);
-        free(tmp);
         return (line);
 }
 
