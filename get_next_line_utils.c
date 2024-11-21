@@ -18,7 +18,7 @@ size_t   ft_strlen(char *s)
 
         i = 0;
 	if (!s || !*s)
-        	return 0;
+        	return (0);
         while (s[i])
                 i++;
         return (i);
@@ -110,7 +110,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1[0] = '\0';
 	ft_strlcat(a, s1, (len_s1 + 1));
 	ft_strlcat(a, s2, (len_s1 + len_s2 + 1));
-	free(s1);
-	free(s2);
 	return (a);
 }

@@ -36,16 +36,36 @@ char    *ft_sub(char **src)
                 s = (char *)malloc(sizeof(char) * (ft_strchar(*src, '\n') + 2));
                 if (!s)
                         return (NULL);
-                s[ft_strchar(*src, '\n') + 1] = '\0';
                 ft_bzero(s, (ft_strchar(*src, '\n') + 2));
                 ft_strlcat(s, *src, (ft_strchar(*src, '\n') + 2));
                 temp_static = *src;
-                *src = ft_strdup(&(*src)[ft_strchar(*src, '\n')] + 1);
+                *src = ft_strdup(&(*src)[ft_strchar(*src, '\n') + 1]);
+                if (!*src || !**src)
+                {
+                        free(*src);
+                        *src = NULL;
+                }
                 free(temp_static);
+		if (!ft_strlen(s))
+		{
+			free(s);
+			return (NULL);
+		}
                 return (s);
         }
         else
-                return(*src);
+        {
+		if (!ft_strlen(*src))
+		{
+			free(*src);
+                        *src = NULL;
+			return (NULL);
+		}
+		temp_static = ft_strdup(*src);
+		free(*src);
+		*src = NULL;
+                return(temp_static);
+        }
 
 }
 
@@ -54,14 +74,8 @@ char    *ft_cpy_line(int fd, char **s, char **s_static)
         int  btys_read;
         
         btys_read = 1;
-        // btys_read = read(fd, *s, BUFFER_SIZE);
-        // if (btys_read < 0)
-        //         return (NULL);
-        // (*s)[btys_read] = '\0';
         while(btys_read > 0)
         {
-                if (!*s_static)
-                        *s_static = ft_strdup("");
                 *s_static = ft_strjoin(*s_static, *s);
                 if (ft_strchar(*s_static, '\n') != -1)
                         break;
@@ -69,6 +83,7 @@ char    *ft_cpy_line(int fd, char **s, char **s_static)
                 if (btys_read < 0)
                 {
                         free(*s);
+			*s = NULL;
                         return (NULL);
                 }
                 if (btys_read == 0)
@@ -95,25 +110,26 @@ char    *get_next_line(int fd)
                 return (NULL);
         tmp[0] = '\0';
         line = ft_cpy_line(fd, &tmp, &remaining);
+        if (!line)
+                return (NULL);
+        free(tmp);
         return (line);
 }
 
-// int     main()
-// {
-//         int     fd;
-//         //char    *line;
-//         char    *tmp;
-//         int     c;
-
-//         fd = open("teste.txt", O_RDONLY);
-//         c = 0;
-//         while (c < 4)
-//         {
-//                 printf("%d\n",c);
-//                 tmp = get_next_line(fd);
-//                 printf("%s",tmp);
-//                 free(tmp);
-//                 c++;
-//         }
-//         close(fd);
-// }
+int     main()
+{
+        int     fd;
+        //char    *line;
+        char    *tmp;
+        int     c;
+        char    *s;
+        fd = open("teste.txt", O_RDONLY);
+        c = 0;
+        s = get_next_line(fd);
+        while (s != NULL) {
+                printf("TESTE: %s", s);
+                free(s);
+                s = get_next_line(fd);
+        }
+        close(fd);
+}
