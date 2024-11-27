@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	ft_strchar(char *s, int c)
 {
@@ -108,17 +108,17 @@ static char	*ft_cpy_line(int fd, char **tmp, char **remaining)
 
 char	*get_next_line(int fd)
 {
-	static char	*remaining;
+	static char	*remaining[FD_MAX];
 	char		*tmp;
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_MAX)
 		return (NULL);
 	tmp = (char *) malloc(BUFFER_SIZE + 1);
 	if (!tmp)
 		return (NULL);
 	tmp[0] = '\0';
-	line = ft_cpy_line(fd, &tmp, &remaining);
+	line = ft_cpy_line(fd, &tmp, &remaining[fd]);
 	if (!line)
 		return (NULL);
 	free(tmp);

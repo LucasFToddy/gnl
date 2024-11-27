@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucas-do <lucas-do@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 17:19:21 by lucas-do          #+#    #+#             */
-/*   Updated: 2024/11/23 14:35:12 by lucas-do         ###   ########.fr       */
+/*   Created: 2024/11/25 18:08:32 by lucas-do          #+#    #+#             */
+/*   Updated: 2024/11/25 18:08:34 by lucas-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
 
-# define GET_NEXT_LINE_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 
 #  define BUFFER_SIZE 42
+
+# endif
+
+# ifndef FD_MAX
+
+#  define FD_MAX 1024
 
 # endif
 
